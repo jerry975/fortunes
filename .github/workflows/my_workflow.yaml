@@ -30,7 +30,8 @@ jobs:
           with:
             slack_token: ${{ secrets.SLACK_TOKEN }}
             channel_id: C05R666T281
-            file_path: 'docs/*.txt'
+            file_path: 'trivy-results.txt'
             initial_comment: 'scan report by jerry'
+           
 
         
