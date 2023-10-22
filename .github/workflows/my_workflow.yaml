@@ -11,12 +11,34 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
           
-        - name: Run Trivy vulnerability scanner in repo mode
+        - name: scan
           uses: aquasecurity/trivy-action@master
           with:
             scan-type: 'fs'
             format: 'table'
             output: 'trivy-results.txt'
             severity: 'CRITICAL'
+
+        - name: Send custom JSON data to Slack workflow
+          id: slack
+          uses: slackapi/slack-github-action@v1.24.0
+          with:
+              # For posting a rich message using Block Kit
+            payload: |
+              {
+                "text": "1",
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "2"
+                    }
+                  }
+                ]
+              }
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
         
