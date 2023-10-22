@@ -23,7 +23,14 @@ jobs:
           uses: rtCamp/action-slack-notify@v2
           env:
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_MESSAGE: 'Post Content :jerry'
-            SLACK_TITLE: CICD
+            SLACK_MESSAGE: 'fail trivy scan, see uploaded report'
+            SLACK_TITLE: Scan failed-jerry
+
+        - uses: MeilCli/slack-upload-file@v3
+          with:
+            slack_token: ${{ secrets.SLACK_TOKEN }}
+            channel_id: C05R666T281
+            file_path: 'docs/*.txt'
+            initial_comment: 'scan report by jerry'
 
         
