@@ -33,7 +33,7 @@ jobs:
             initial_comment: 'scan report by jerry'
             file_type: 'text'
             file_name: 'trivy-results.txt'
-            title: 'Report'
+            
             
 
         
