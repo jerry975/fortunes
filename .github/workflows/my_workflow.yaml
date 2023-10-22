@@ -1,19 +1,19 @@
 name: my_workflow
 on:
   push:
-    branches: 
-    - 'v[0-9].[0-9].*'
+    branches:
+      - 'v[0-9].[0-9].*'
 
 jobs:
   workflow:
     name: Workflow
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
 
-    - name: Run Trivy vulnerability scanner in repo mode
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner in repo mode
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
@@ -21,3 +21,4 @@ jobs:
           format: 'table'
           output: 'trivy-results.txt'
           severity: 'CRITICAL'
+
