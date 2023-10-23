@@ -8,6 +8,13 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+        - name: Check Commit Message
+          run: |
+            if [[ $(git log --format=%B -n 1 ${{ github.sha }}) == '#NORUN'* ]]; then
+              echo "Commit message starts with #NORUN. Skipping the pipeline."
+              exit 0  # Exit with success to skip the rest of the steps
+            fi
+
         - name: Checkout code
           uses: actions/checkout@v4
           
@@ -28,6 +35,7 @@ jobs:
             SLACK_TITLE: Scan failed-jerry
 
         - uses: MeilCli/slack-upload-file@v3
+          if: failure()
           with:
             slack_token: ${{ secrets.SLACK_TOKEN }}
             channel_id: ${{ secrets.CHANNEL_ID }}
@@ -67,3 +75,15 @@ jobs:
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
             DIGEST: ${{ steps.build-and-push.outputs.digest }}
+
+        - name: Slack Notification
+          uses: rtCamp/action-slack-notify@v2
+          env:
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+            
+            SLACK_TITLE: Image build and signed
+            SLACK_MESSAGE: 'Name: Liu Jiarui
+                            Metriculation: A0285883J
+                            Email: e1221695@u.nus.edu
+                            Git: https://github.com/jerry975/fortunes.git
+                            Image: https://hub.docker.com/repository/docker/jerry975/go-fortune/general'
