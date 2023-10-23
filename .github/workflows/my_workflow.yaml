@@ -34,6 +34,9 @@ jobs:
             initial_comment: 'scan report by jerry'
             file_path: 'trivy-results.txt'
 
+        - name: Install Cosign
+          uses: sigstore/cosign-installer@v3.1.1
+
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v3
           
@@ -53,10 +56,6 @@ jobs:
             push: true
             tags: jerry975/go-fortune:tagname
             #file: fortunes/
-
-
-        - name: Install Cosign
-          uses: sigstore/cosign-installer@v3.1.1
 
         - name: Sign image with a key
           run: |
