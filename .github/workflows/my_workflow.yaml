@@ -59,7 +59,7 @@ jobs:
 
         - name: Sign image with a key
           run: |
-            cosign sign --yes --key env://COSIGN_PRIVATE_KEY jerry975/go-fortune:${{github.sha}}
+            cosign sign --yes --key env://COSIGN_PRIVATE_KEY jerry975/go-fortune@sha256:b71d5fbc694661e73680d0036d8be87a0d84ca42497cebb3065fa1de91bca9cf
           env:
             TAGS: ${{ steps.docker_meta.outputs.tags }}
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
