@@ -48,7 +48,7 @@ jobs:
           uses: docker/build-push-action@v5
           with:
               push: true
-              tags: jerry975/cicd+commit message
+              tags: jerry975/cicd:abcd1234
               
               context: D:\WebDevelopment\CICD\fortunes
 
