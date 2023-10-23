@@ -49,10 +49,10 @@ jobs:
         - name: Build and push
           uses: docker/build-push-action@v5
           with:
-            #context: .#
+            context: fortunes
             push: true
             tags: jerry975/go-fortune:tagname
-            #file: D:\WebDevelopment\CICD\fortunes\Dockerfile
+            #file: fortunes/
 
 
         
