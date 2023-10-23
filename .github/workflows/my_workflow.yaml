@@ -24,7 +24,7 @@ jobs:
             scan-type: 'fs'
             format: 'table'
             output: 'trivy-results.txt'
-            severity: 'HIGH'      
+            severity: 'CRITICAL'      
               
         - name: Slack Notification
           if: failure()
