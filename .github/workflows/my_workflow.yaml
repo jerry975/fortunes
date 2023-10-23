@@ -17,10 +17,7 @@ jobs:
             scan-type: 'fs'
             format: 'table'
             output: 'trivy-results.txt'
-            severity: 'HIGH'
-
-       
-        
+            severity: 'HIGH'      
               
         - name: Slack Notification
           if: failure()
@@ -55,7 +52,7 @@ jobs:
             #context: .#
             push: true
             tags: jerry975/go-fortune:tagname
-            file: D:\WebDevelopment\CICD\fortunes\Dockerfile
+            #file: D:\WebDevelopment\CICD\fortunes\Dockerfile
 
 
         
