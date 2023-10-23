@@ -32,7 +32,7 @@ jobs:
           uses: rtCamp/action-slack-notify@v2
           env:
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_MESSAGE: 'fail trivy scan, see uploaded report https://github.com/${{ github.repository }}'
+            SLACK_MESSAGE: 'fail trivy scan, see uploaded report'
             SLACK_TITLE: Scan failed-jerry
             SLACK_COLOR: ${{ job.status }}
 
@@ -88,5 +88,5 @@ jobs:
               Name: Liu Jiarui
               Metriculation: A0285883J
               Email: e1221695@u.nus.edu
-              Git: https://github.com/jerry975/fortunes.git
+              Git: https://github.com/${{ github.repository }}
               Image: https://hub.docker.com/repository/docker/jerry975/go-fortune
