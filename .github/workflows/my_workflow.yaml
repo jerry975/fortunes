@@ -56,14 +56,14 @@ jobs:
           with:
             context: fortunes
             push: true
-            tags: jerry975/go-fortune:tagname
+            tags: jerry975/go-fortune:abcd1234
             #file: fortunes/
 
         - name: Sign image with a key
           run: |
             cosign sign --yes --key env://COSIGN_PRIVATE_KEY jerry975/go-fortune@sha256:b71d5fbc694661e73680d0036d8be87a0d84ca42497cebb3065fa1de91bca9cf
           env:
-            TAGS: ${{ steps.docker_meta.outputs.tags }}
+            TAGS: jerry975/go-fortune:abcd1234
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
             DIGEST: ${{ steps.build-and-push.outputs.digest }}
