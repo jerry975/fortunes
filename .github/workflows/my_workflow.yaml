@@ -67,7 +67,7 @@ jobs:
             context: fortunes
             push: true
             tags: jerry975/go-fortune:abcd1234
-            #file: fortunes/
+            #file: fortunes
 
         - name: Sign image with a key
           run: |
