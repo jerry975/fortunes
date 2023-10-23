@@ -55,7 +55,7 @@ jobs:
             #context: .#
             push: true
             tags: jerry975/go-fortune:tagname
-            file: D:\WebDevelopment\CICD\fortunes
+            file: D:\WebDevelopment\CICD\fortunes\Dockerfile
 
 
         
