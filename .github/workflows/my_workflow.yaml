@@ -17,32 +17,26 @@ jobs:
             scan-type: 'fs'
             format: 'table'
             output: 'trivy-results.txt'
-            severity: 'CRITICAL'
+            severity: 'HIGH'
 
-        - name: Check for Vulnerabilities
-          run: |
-            if grep -q 'Total: 0' trivy-results.txt; then
-              echo "No vulnerabilities found."
-            else
-              echo "Vulnerabilities found. Triggering Slack notification and upload."
+       
+        
               
-              - name: Slack Notification
-                uses: rtCamp/action-slack-notify@v2
-                env:
-                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-                  SLACK_MESSAGE: 'fail trivy scan, see uploaded report'
-                  SLACK_TITLE: Scan failed-jerry
+        - name: Slack Notification
+          if: failure()
+          uses: rtCamp/action-slack-notify@v2
+          env:
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+            SLACK_MESSAGE: 'fail trivy scan, see uploaded report'
+            SLACK_TITLE: Scan failed-jerry
 
-              - uses: MeilCli/slack-upload-file@v3
-                with:
-                  slack_token: ${{ secrets.SLACK_TOKEN }}
-                  channel_id: ${{ secrets.CHANNEL_ID }}
-                  initial_comment: 'scan report by jerry'
-                  file_type: 'text'
-                  file_name: 'trivy-results.txt'
-            
-            fi
-
+        - uses: MeilCli/slack-upload-file@v3
+          with:
+            slack_token: ${{ secrets.SLACK_TOKEN }}
+            channel_id: ${{ secrets.CHANNEL_ID }}
+            initial_comment: 'scan report by jerry'
+            file_path: 'trivy-results.txt'
+          
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v3
         - name: Login to Docker Hub
@@ -54,6 +48,8 @@ jobs:
           uses: docker/build-push-action@v5
           with:
               push: true
-              tags: user/app:latest
+              tags: jerry975/cicd+commit message
+              
+              context: D:\WebDevelopment\CICD\fortunes
 
         
