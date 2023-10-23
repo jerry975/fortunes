@@ -34,7 +34,7 @@ jobs:
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
             SLACK_MESSAGE: 'fail trivy scan, see uploaded report'
             SLACK_TITLE: Scan failed-jerry
-            SLACK_COLOR: #ff0000
+            SLACK_COLOR: #AA0000
 
         - uses: MeilCli/slack-upload-file@v3
           if: failure()
