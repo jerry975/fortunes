@@ -54,7 +54,7 @@ jobs:
           with:
             #context: .#
             push: true
-            tags: jerry975/go-fortune:abcd1234
+            tags: jerry975/go-fortune:tagname
 
 
         
